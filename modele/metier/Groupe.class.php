@@ -1,5 +1,8 @@
 <?php
 
+
+namespace modele\metier;
+
 Class Groupe{
     
     //Declaration des variables de la class
@@ -93,8 +96,7 @@ Class Groupe{
     
     public function __toString() {
         
-        $etat = "objet de type :".get_class($this);
-        $etat .= "- Id :".$this->getId();
+        $etat = "- Id :".$this->getId();
         $etat .= "- Nom :".$this->getNom();
         $etat .= "- IdentiteResponsable :".$this->getIdentiteResponsable();
         $etat .= "- AdressePostale :".$this->getAdressePostale();

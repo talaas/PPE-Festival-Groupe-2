@@ -1,5 +1,8 @@
 <?php
 
+
+namespace modele\metier;
+
 Class Etablissement{
     
     //Declaration des variables de la class
@@ -133,8 +136,7 @@ Class Etablissement{
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
-        $etat = "objet de type :".get_class($this);
-        $etat .= "- Id :".$this->getId();
+        $etat = "- Id :".$this->getId();
         $etat .= "- Nom :".$this->getNom();
         $etat .= "- AdresseRue :".$this->getAdresseRue();
         $etat .= "- CodePostal :".$this->getCodePostal();

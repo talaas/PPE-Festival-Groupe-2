@@ -1,6 +1,7 @@
 <?php
+namespace modele\metier;
 
-class Categorie {
+class Attribution {
     
     //Declaration des variables de la class
     
@@ -62,8 +63,7 @@ class Categorie {
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
-        $etat = "objet de type :".get_class($this);
-        $etat .= "- idEtab :".$this->getIdEtab();
+        $etat = "- idEtab :".$this->getIdEtab();
         $etat .= "- IdTypeChambre".$this->getIdTypeChambre();
         $etat .= "- IdGroupe".$this->getIdGroupe();
         $etat .= "- NombreChambres".$this->getNombreChambres();

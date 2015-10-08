@@ -1,5 +1,8 @@
 <?php
 
+namespace modele\metier;
+
+
 Class TypeChambre{
     
     
@@ -41,8 +44,7 @@ Class TypeChambre{
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
-        $etat = "objet de type :".get_class($this);
-        $etat .= "- Id :".$this->getId();
+        $etat = "- Id :".$this->getId();
         $etat .= "- Libelle :".$this->getLibelle();
         return $etat;
     }

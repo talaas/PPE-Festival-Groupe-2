@@ -1,5 +1,7 @@
 <?php
 
+namespace modele\metier;
+
 Class Offre{
     
     //Declaration des variables de la class
@@ -53,8 +55,7 @@ Class Offre{
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
-        $etat = "objet de type :".get_class($this);
-        $etat .= "- idEtab :".$this->getIdEtab();
+        $etat = "- idEtab :".$this->getIdEtab();
         $etat .= "- IdTypeChambre :".$this->getIdTypeChambre();
         $etat .= "- NombreChambres :".$this->getNombreChambres();
         return $etat;
