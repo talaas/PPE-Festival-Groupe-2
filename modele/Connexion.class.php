@@ -1,8 +1,44 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Description of Connexion
+ *
+ * @author btssio
  */
+namespace modele;
+use \PDO;
+use \PDOException;
 
+define('DSN', 'mysql:host=localhost;dbname=festival');
+define('USER', 'root');
+define('MDP', "");
+
+class Connexion {
+    
+    private static $pdo = null;
+
+    /**
+     * Crée un objet de type PDO et ouvre la connexion 
+     * @return un objet de type PDO pour accéder à la base de données
+     */
+    static function connecter() {
+        /* Connexion à une base via PDO */
+        try {
+            self::$pdo = new PDO(DSN, USER, MDP);
+            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            self::$pdo->query("SET NAMES utf8");
+        } catch (PDOException $e) {
+            echo 'Connexion échouée : ' . $e->getMessage();
+        }
+        return self::$pdo;
+    }
+
+    static function deconnecter() {
+        self::$pdo= null;
+    }
+    static function getPdo() {
+        return self::$pdo;
+    }
+
+
+}
