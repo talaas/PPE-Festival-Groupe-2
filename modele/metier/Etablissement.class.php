@@ -2,6 +2,10 @@
 
 
 namespace modele\metier;
+<<<<<<< HEAD
+use modele\metier\Etablissement;
+=======
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 Class Etablissement{
     
@@ -136,7 +140,12 @@ Class Etablissement{
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
+<<<<<<< HEAD
+        $etat = "objet de type :".get_class($this);
+        $etat .= "- Id :".$this->getId();
+=======
         $etat = "- Id :".$this->getId();
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         $etat .= "- Nom :".$this->getNom();
         $etat .= "- AdresseRue :".$this->getAdresseRue();
         $etat .= "- CodePostal :".$this->getCodePostal();

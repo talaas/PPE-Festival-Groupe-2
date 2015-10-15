@@ -4,13 +4,21 @@ namespace modele\dao;
 use modele\metier\Offre;
 use modele\Connexion;
 use \PDO;
+<<<<<<< HEAD
+use modele\dao\DAO;
+=======
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 class OffreDao implements Dao  {
     //put your code here
 
        
     public static function enregistrementVersObjet($unEnregistrement) {
+<<<<<<< HEAD
+        $retour = new Offre($unEnregistrement['ofrre_idEtab'], $unEnregistrement['offre_idTypeChambre'], $unEnregistrement['offre_nombreChambre']);
+=======
         $retour = new Groupe($unEnregistrement['ofrre_idEtab'], $unEnregistrement['offre_idTypeChambre'], $unEnregistrement['offre_nombreChambre']);
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         return $retour;        
     }
 

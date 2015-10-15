@@ -2,6 +2,10 @@
 
 
 namespace modele\metier;
+<<<<<<< HEAD
+use modele\metier\Groupe;
+=======
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 Class Groupe{
     
@@ -96,7 +100,12 @@ Class Groupe{
     
     public function __toString() {
         
+<<<<<<< HEAD
+        $etat = "objet de type :".get_class($this);
+        $etat .= "- Id :".$this->getId();
+=======
         $etat = "- Id :".$this->getId();
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         $etat .= "- Nom :".$this->getNom();
         $etat .= "- IdentiteResponsable :".$this->getIdentiteResponsable();
         $etat .= "- AdressePostale :".$this->getAdressePostale();

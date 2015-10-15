@@ -1,6 +1,10 @@
 <?php
 
 namespace modele\metier;
+<<<<<<< HEAD
+use modele\metier\Offre;
+=======
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 Class Offre{
     
@@ -55,7 +59,12 @@ Class Offre{
     //Fonction ToString pour voir l'etat de l'objet.
     
     public function __toString() {
+<<<<<<< HEAD
+        $etat = "objet de type :".get_class($this);
+        $etat .= "- idEtab :".$this->getIdEtab();
+=======
         $etat = "- idEtab :".$this->getIdEtab();
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         $etat .= "- IdTypeChambre :".$this->getIdTypeChambre();
         $etat .= "- NombreChambres :".$this->getNombreChambres();
         return $etat;

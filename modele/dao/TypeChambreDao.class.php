@@ -4,13 +4,21 @@ namespace modele\dao;
 use modele\metier\TypeChambre;
 use modele\Connexion;
 use \PDO;
+<<<<<<< HEAD
+use modele\dao\DAO;
+=======
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 class TypeChambreDao implements Dao  {
     //put your code here
 
        
     public static function enregistrementVersObjet($unEnregistrement) {
+<<<<<<< HEAD
+        $retour = new Groupe($unEnregistrement['id'], $unEnregistrement['libelle']);
+=======
         $retour = new Groupe($unEnregistrement['typeChambre_id'], $unEnregistrement['typeChambre_libelle']);
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         return $retour;        
     }
 
@@ -53,7 +61,11 @@ class TypeChambreDao implements Dao  {
         $retour = null;
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
+<<<<<<< HEAD
+            $sql = "SELECT * FROM typechambre WHERE id = ?";
+=======
             $sql = "SELECT * FROM typechambre WHERE typechambre_id = ?";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
@@ -84,49 +96,77 @@ class TypeChambreDao implements Dao  {
     }
     
     function obtenirTypesChambres($connexion) {
+<<<<<<< HEAD
+    $req = "SELECT * FROM typechambre";
+=======
     $req = "SELECT * FROM TypeChambre";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt;
 }
 
 function obtenirIdTypesChambres($connexion) {
+<<<<<<< HEAD
+    $req = "SELECT id FROM typechambre";
+=======
     $req = "SELECT id FROM TypeChambre";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt;
 }
 
 function obtenirLibelleTypesChambres($connexion) {
+<<<<<<< HEAD
+    $req = "SELECT libelle FROM typechambre ORDER BY id";
+=======
     $req = "SELECT libelle FROM TypeChambre ORDER BY id";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt;
 }
 
 function obtenirLibelleTypeChambre($connexion, $id) {
+<<<<<<< HEAD
+    $req = "SELECT libelle FROM typechambre WHERE id = ?";
+=======
     $req = "SELECT libelle FROM TypeChambre WHERE id = ?";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute(array($id));
     return $stmt->fetchColumn();
 }
 
 function obtenirNbTypesChambres($connexion) {
+<<<<<<< HEAD
+    $req = "SELECT count(*) FROM typechambre";
+=======
     $req = "SELECT count(*) FROM TypeChambre";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt->fetchColumn();
 }
 
 function supprimerTypeChambre($connexion, $id) {
+<<<<<<< HEAD
+    $req = "DELETE FROM typechambre WHERE id=?";
+=======
     $req = "DELETE FROM TypeChambre WHERE id=?";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $ok = $stmt->execute(array($id));
     return $ok;
 }
 
 function obtenirDetailTypeChambre($connexion, $id) {
+<<<<<<< HEAD
+    $req = "SELECT * FROM typechambre WHERE id=?";
+=======
     $req = "SELECT * FROM TypeChambre WHERE id=?";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute(array($id));
     return $stmt;
@@ -135,9 +175,15 @@ function obtenirDetailTypeChambre($connexion, $id) {
 function creerModifierTypeChambre($connexion, $mode, $id, $libelle) {
     $libelle = str_replace("'", "''", $libelle);
     if ($mode == 'C') {
+<<<<<<< HEAD
+        $req = "INSERT INTO typeChambre VALUES (:id, :lib)";
+    } else {
+        $req = "UPDATE typechambre SET libelle=:lib WHERE id=:id";
+=======
         $req = "INSERT INTO TypeChambre VALUES (:id, :lib)";
     } else {
         $req = "UPDATE TypeChambre SET libelle=:lib WHERE id=:id";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     }
     $stmt = $connexion->prepare($req);
     $stmt->bindParam(':id', $id);
@@ -147,7 +193,11 @@ function creerModifierTypeChambre($connexion, $mode, $id, $libelle) {
 }
 
 function estUnIdTypeChambre($connexion, $id) {
+<<<<<<< HEAD
+    $req = "SELECT COUNT(*) FROM typechambre WHERE id=?";
+=======
     $req = "SELECT COUNT(*) FROM TypeChambre WHERE id=?";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     $stmt = $connexion->prepare($req);
     $stmt->execute(array($id));
     return $stmt->fetchColumn();
@@ -159,11 +209,19 @@ function estUnLibelleTypeChambre($connexion, $mode, $id, $libelle) {
     // sinon on vérifie la non existence d'un autre type chambre (id!='$id') 
     // ayant le même libelle
     if ($mode == 'C') {
+<<<<<<< HEAD
+        $req = "SELECT COUNT(*) FROM typechambre WHERE libelle=:lib";
+        $stmt = $connexion->prepare($req);
+        $stmt->bindParam(':lib', $libelle);
+    } else {
+        $req = "SELECT COUNT(*) FROM typechambre WHERE libelle=:lib and id <> :id";
+=======
         $req = "SELECT COUNT(*) FROM TypeChambre WHERE libelle=:lib";
         $stmt = $connexion->prepare($req);
         $stmt->bindParam(':lib', $libelle);
     } else {
         $req = "SELECT COUNT(*) FROM TypeChambre WHERE libelle=:lib and id <> :id";
+>>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
         $stmt = $connexion->prepare($req);
         $stmt->bindParam(':lib', $libelle);
         $stmt->bindParam(':id', $id);
