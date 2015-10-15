@@ -11,7 +11,7 @@ class TypeChambreDao implements Dao  {
 
        
     public static function enregistrementVersObjet($unEnregistrement) {
-        $retour = new Groupe($unEnregistrement['id'], $unEnregistrement['libelle']);
+        $retour = new TypeChambre($unEnregistrement['id'], $unEnregistrement['libelle']);
         return $retour;        
     }
 

@@ -4,6 +4,7 @@ namespace modele\dao;
 use modele\metier\Etablissement;
 use modele\Connexion;
 use \PDO;
+use modele\dao\DAO;
 
 class EtablissementDao implements Dao  {
     //put your code here

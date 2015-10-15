@@ -9,9 +9,9 @@
         use modele\Connexion;
 //        use modele\dao\AttributionDao;
 //        use modele\dao\EtablissementDao;
-        use modele\dao\GroupeDao;
+//        use modele\dao\GroupeDao;
 //        use modele\dao\OffreDao;
-//        use modele\dao\TypeChambreDao;
+        use modele\dao\TypeChambreDao;
         use \PDO;
         
         require_once("../includes/fonctions.inc.php");
@@ -32,7 +32,7 @@
         $lesOffres = OffreDao::getAll();
         var_dump($lesOffres);
        
-        
+    **/    
         // Test de TypeChambreDao
         echo "<h3>Test de TypeChambreDao</h3>";
 
@@ -46,7 +46,7 @@
         $lesTypesChambres = TypeChambreDao::getAll();
         var_dump($lesTypesChambres);
         
-    **/       
+    /**       
         // Test de GroupeDao
         echo "<h3>Test de GroupeDao</h3>";
 
@@ -61,7 +61,7 @@
         var_dump($lesGroupes);
         
         
-  /**   
+     
         // Test de EtablissementDao
         echo "<h3>Test de EtablissementDao</h3>";
 

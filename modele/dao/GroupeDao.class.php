@@ -4,6 +4,7 @@ namespace modele\dao;
 use modele\metier\Groupe;
 use modele\Connexion;
 use \PDO;
+use modele\dao\DAO;
 
 class GroupeDao implements Dao {
     //put your code here
