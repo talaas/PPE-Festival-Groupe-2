@@ -1,20 +1,16 @@
 <?php
 
 namespace modele\dao;
-use modele\metier\Categorie;
+use modele\metier\Groupe;
 use modele\Connexion;
 use \PDO;
 
-<<<<<<< HEAD
 class GroupeDao implements Dao {
-=======
-class GroupeDao {
->>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
     //put your code here
 
        
     public static function enregistrementVersObjet($unEnregistrement) {
-        $retour = new Groupe($unEnregistrement['groupe_id'], $unEnregistrement['groupe_nom'], $unEnregistrement['groupe_identiteResponsable'], $unEnregistrement['groupe_adressePostale'], $unEnregistrement['groupe_nomPays'], $unEnregistrement['groupe_hebergement']);
+    $retour = new Groupe($unEnregistrement['id'], $unEnregistrement['nom'], $unEnregistrement['identiteResponsable'], $unEnregistrement['adressePostale'],$unEnregistrement['nomPays'], $unEnregistrement['nomPays'], $unEnregistrement['hebergement']);
         return $retour;        
     }
 
@@ -61,11 +57,7 @@ class GroupeDao {
         $retour = null;
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-<<<<<<< HEAD
-            $sql = "SELECT * FROM groupe WHERE groupe_id = ?";
-=======
-            $sql = "SELECT * FROM categorie WHERE groupe_id = ?";
->>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
+            $sql = "SELECT * FROM groupe WHERE id = ?";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau

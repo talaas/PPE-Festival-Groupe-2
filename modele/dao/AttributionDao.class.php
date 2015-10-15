@@ -4,10 +4,7 @@ namespace modele\dao;
 use modele\metier\Attribution;
 use modele\Connexion;
 use \PDO;
-<<<<<<< HEAD
 use modele\dao\DAO;
-=======
->>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 
 class Attribution implements Dao  {
     //put your code here

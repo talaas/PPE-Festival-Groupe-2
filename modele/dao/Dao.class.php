@@ -51,9 +51,5 @@ interface Dao {
      */
     public static function objetVersEnregistrement($objetMetier) ;
     
-<<<<<<< HEAD
   
-=======
-    
->>>>>>> c9933a051c9617af2f1960f661dc7aad77b4be53
 }
