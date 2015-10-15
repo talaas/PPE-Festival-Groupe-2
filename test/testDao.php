@@ -7,10 +7,10 @@
     <body>
         <?php
         use modele\Connexion;
-//        use modele\dao\AttributionDao;
-//        use modele\dao\EtablissementDao;
-//        use modele\dao\GroupeDao;
-//        use modele\dao\OffreDao;
+        use modele\dao\AttributionDao;
+        use modele\dao\EtablissementDao;
+        use modele\dao\GroupeDao;
+        use modele\dao\OffreDao;
         use modele\dao\TypeChambreDao;
         use \PDO;
         
@@ -20,7 +20,7 @@
         $pdo = Connexion::connecter();
         
         // Test de OffreDao
- /**       echo "<h3>Test de OffreDao</h3>";
+        echo "<h3>Test de OffreDao</h3>";
 
         // Offre : test de sélection par code
         echo "<p>Offre : test de sélection par code</p>";
@@ -32,7 +32,7 @@
         $lesOffres = OffreDao::getAll();
         var_dump($lesOffres);
        
-    **/    
+      
         // Test de TypeChambreDao
         echo "<h3>Test de TypeChambreDao</h3>";
 
@@ -45,8 +45,8 @@
         echo "<p>TypeChambre : test de sélection de tous les enregistrements</p>";
         $lesTypesChambres = TypeChambreDao::getAll();
         var_dump($lesTypesChambres);
-        
-    /**       
+         
+           
         // Test de GroupeDao
         echo "<h3>Test de GroupeDao</h3>";
 
@@ -74,22 +74,21 @@
       echo "<p>Etablissement : test de sélection de tous les enregistrements</p>";
         $lesEtablissement = EtablissementDao::getAll();
         var_dump($lesEtablissement);
-        
-        
+              
         
           // Test de AttributionDao
         echo "<h3>Test de AttributionDao</h3>";
 
         // AttributionDao : test de sélection par référence
         echo "<p>Attribution : test de sélection par référence</p>";
-        $uneAttribution = AttributionDao::getOneByIdCompo('0350773A', 'C2', 'g004');
+        $uneAttribution = AttributionDao::getOneById('0350773A');
         echo $uneAttribution;
 
         // Attribution : test de sélection de tous les enregistrements
         echo "<p>Attribution : test de sélection de tous les enregistrements</p>";
         $lesAttributions = AttributionDao::getAll();
         var_dump($lesAttributions);
-   **/  
+     
         
 
         Connexion::deconnecter();               

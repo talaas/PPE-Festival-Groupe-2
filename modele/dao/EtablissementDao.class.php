@@ -11,7 +11,7 @@ class EtablissementDao implements Dao  {
 
        
     public static function enregistrementVersObjet($unEnregistrement) {
-        $retour = new Groupe($unEnregistrement['etablissement_id'], $unEnregistrement['etablissement_nom'], $unEnregistrement['etablissement_adresseRue'],$unEnregistrement['etablissement_codePostal'], $unEnregistrement['etablissement_ville'], $unEnregistrement['etablissement_tel'], $unEnregistrement['etablissement_adresseElectronique'], $unEnregistrement['etablissement_type'], $unEnregistrement['etablissement_civiliteResponsable'],$unEnregistrement['etablissement_nomResponsable'], $unEnregistrement['etablissement_prenomResponsable']);
+        $retour = new Etablissement ($unEnregistrement['id'], $unEnregistrement['nom'], $unEnregistrement['adresseRue'],$unEnregistrement['codePostal'], $unEnregistrement['ville'], $unEnregistrement['tel'], $unEnregistrement['adresseElectronique'], $unEnregistrement['type'], $unEnregistrement['civiliteResponsable'],$unEnregistrement['nomResponsable'], $unEnregistrement['prenomResponsable']);
         return $retour;        
     }
 
@@ -63,7 +63,7 @@ class EtablissementDao implements Dao  {
         $retour = null;
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "SELECT * FROM etablissement WHERE etablissement_id = ?";
+            $sql = "SELECT * FROM etablissement WHERE id = ?";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau

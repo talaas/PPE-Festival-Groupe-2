@@ -1,28 +1,23 @@
 <?php
-
 namespace modele\dao;
-use modele\metier\Attribution;
 use modele\Connexion;
+use modele\metier\Attribution;
 use \PDO;
 use modele\dao\DAO;
 
-class Attribution implements Dao  {
-    //put your code here
-
-       
+class AttributionDao implements Dao {
+        
     public static function enregistrementVersObjet($unEnregistrement) {
-        $retour = new Groupe($unEnregistrement['attribution_idEtab'], $unEnregistrement['attribution_idTypeChambre'], $unEnregistrement['attribution_idGroupe'],$unEnregistrement['attribution_nombreChambres']);
+        $retour = new Attribution($unEnregistrement['idEtab'], $unEnregistrement['idTypeChambre'], $unEnregistrement['idGroupe'], $unEnregistrement['nombreChambres']);
         return $retour;        
     }
 
     public static function objetVersEnregistrement($objetMetier) {
         $retour = array(
             ':idEtab' => $objetMetier->getIdEtab(),
-            ':idTypeChambre' => $objetMetier->getIdTypeChambre(),
+            ':idTypeChambre' => $objetMetier->getidTypeChambre(),
             ':idGroupe' => $objetMetier->getIdGroupe(),
-            ':nombreChambres' => $objetMetier->getNombreChambre()
-            
-
+            ':nombreChambre' => $objetMetier->getNombreChambre()
         );
         return $retour;
     }
@@ -53,20 +48,15 @@ class Attribution implements Dao  {
         return $retour;
     }
 
-  public static function getOneById($valeurClePrimaire) {
-        
-    }
-    
-    public static function getOneByIdCompo($idEtablissement, $idTypeChambre, $idGroupe){
+    public static function getOneById($valeurClePrimaire) {
         $retour = null;
-        $valeursClePrimaire = array($idEtablissement, $idTypeChambre, $idGroupe);
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "SELECT * FROM attribution WHERE idEtab = ? AND idTypeChambre = ? AND idGroupe = ?";
+            $sql = "SELECT * FROM Attribution WHERE idEtab = ?";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
-            if ($queryPrepare->execute($valeursClePrimaire)) {
+            if ($queryPrepare->execute(array($valeurClePrimaire))) {
                 // si la requête réussit :
                 // extraire l'enregistrement retourné par la requête
                 $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
@@ -91,21 +81,5 @@ class Attribution implements Dao  {
     public static function delete($idMetier) {
         
     }
-    
-    function existeAttributionsEtab($connexion, $id) {
-        $req = "SELECT COUNT(*) FROM Attribution WHERE idEtab=?";
-        $stmt = $connexion->prepare($req);
-        $stmt->execute(array($id));
-        return $stmt->fetchColumn();
-    }
 
-// Teste la présence d'attributions pour le type de chambre transmis 
-    function existeAttributionsTypeChambre($connexion, $id) {
-        $req = "SELECT COUNT(*) FROM Attribution WHERE idTypeChambre=?";
-        $stmt = $connexion->prepare($req);
-        $stmt->execute(array($id));
-        return $stmt->fetchColumn();
-    }
-    
 }
-
