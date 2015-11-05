@@ -39,7 +39,7 @@ class EtablissementDao implements Dao  {
         $sql = "SELECT * FROM etablissement";
         try {
             // préparer la requête PDO
-            $queryPrepare = Connexion::getPdo()->prepare($sql);
+            $queryPrepare = Connexion:: getPdo()->prepare($sql);
             // exécuter la requête PDO
             if ($queryPrepare->execute()) {
                 // si la requête réussit :
@@ -93,5 +93,47 @@ class EtablissementDao implements Dao  {
         
     }
     
-    
+    function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
+    if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" ||
+            $ville == "" || $tel == "" || $nomResponsable == "") {
+        ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
+    }
+    if ($id != "") {
+        // Si l'id est constitué d'autres caractères que de lettres non accentuées 
+        // et de chiffres, une erreur est générée
+        if (!estChiffresOuEtLettres($id)) {
+            ajouterErreur
+                    ("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
+        } else {
+            if (estUnIdEtablissement($connexion, $id)) {
+                ajouterErreur("L'établissement $id existe déjà");
+            }
+        }
+    }
+    if ($nom != "" && estUnNomEtablissement($connexion, 'C', $id, $nom)) {
+        ajouterErreur("L'établissement $nom existe déjà");
+    }
+    if ($codePostal != "" && !estUnCp($codePostal)) {
+        ajouterErreur('Le code postal doit comporter 5 chiffres');
+    }
+}
+
+function verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
+    if ($nom == "" || $adresseRue == "" || $codePostal == "" || $ville == "" ||
+            $tel == "" || $nomResponsable == "") {
+        ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
+    }
+    if ($nom != "" && estUnNomEtablissement($connexion, 'M', $id, $nom)) {
+        ajouterErreur("L'établissement $nom existe déjà");
+    }
+    if ($codePostal != "" && !estUnCp($codePostal)) {
+        ajouterErreur('Le code postal doit comporter 5 chiffres');
+    }
+}
+
+function estUnCp($codePostal) {
+    // Le code postal doit comporter 5 chiffres
+    return strlen($codePostal) == 5 && estEntier($codePostal);
+}
+
 }

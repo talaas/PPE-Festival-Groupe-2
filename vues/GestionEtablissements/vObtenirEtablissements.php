@@ -15,7 +15,7 @@ echo "
    </tr>";
 
 $rsEtab = obtenirIdNomEtablissements($connexion);
-//$rsEtab = mysql_query($req, $connexion);
+$rsEtab = mysql_query($req, $connexion);
 
 // BOUCLE SUR LES ÉTABLISSEMENTS
 while ($lgEtab = $rsEtab->fetch(PDO::FETCH_ASSOC)) {
@@ -23,7 +23,7 @@ while ($lgEtab = $rsEtab->fetch(PDO::FETCH_ASSOC)) {
     $nom = $lgEtab['nom'];
     echo "
 		<tr class='ligneTabNonQuad'>
-         <td width='52%'>$nom</td>
+         <td width='52%'>".$lgEtab->getNom()."</td>
          
          <td width='16%' align='center'> 
          <a href='cGestionEtablissements.php?action=detailEtab&id=$id'>
