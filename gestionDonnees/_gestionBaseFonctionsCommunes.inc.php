@@ -127,6 +127,71 @@ function obtenirNbEtabOffrantChambres($connexion) {
     return $stmt->fetchColumn();
 }
 
+// Fonctions de Gestion des Groupes
+
+function obtenirIdNomGroupes($connexion) {
+    $req = "SELECT id, nom FROM groupe ORDER BY id";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+function obtenirDetailGroupe($connexion, $id) {
+    $req = "SELECT * FROM Groupe WHERE id=?";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute(array($id));
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+function obtenirIdGroupes($connexion) {
+    $req = "SELECT id FROM Groupe ORDER BY id";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirNomGroupes($connexion) {
+    $req = "SELECT nom FROM Groupe ORDER BY nom";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirIdentiteResponsable($connexion) {
+    $req = "SELECT identiteResponsable FROM Groupe ORDER BY identiteResponsable";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirAdressePostale($connexion) {
+    $req = "SELECT adressePostale FROM Groupe ORDER BY adressePostale";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+function obtenirNombrePersonnes($connexion) {
+    $req = "SELECT nombrePersonnes FROM Groupe ORDER BY nombrePersonnes";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+
+function obtenirNomPays($connexion) {
+    $req = "SELECT nomPays FROM Groupe ORDER BY nomPays";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function hebergement($connexion) {
+    $req = "SELECT hebergement FROM Groupe ORDER BY hebergement";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+
+
 // FONCTIONS DE GESTION DES TYPES DE CHAMBRES
 
 function obtenirTypesChambres($connexion) {
