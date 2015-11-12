@@ -1,12 +1,6 @@
 <?php
-
-include ("_debut.inc.php"); 
-require_once(__DIR__."/../../includes/fonctions.inc.php");
-
-use modele\Connexion;
-use modele\metier\Etablissement;
-use modele\dao\EtablissementDAO;
-use modele\dao\DAO;
+use modele\dao\FonctionsCommunesDao;
+include("_debut.inc.php");
 
 // AFFICHER L'ENSEMBLE DES ÉTABLISSEMENTS
 // CETTE PAGE CONTIENT UN TABLEAU CONSTITUÉ D'1 LIGNE D'EN-TÊTE ET D'1 LIGNE PAR
@@ -17,34 +11,34 @@ echo "
 <table width='55%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
 
    <tr class='enTeteTabNonQuad'>
-      <td colspan='4'><strong>Etablissements</strong></td>
+      <td colspan='4'><strong>Groupes</strong></td>
    </tr>";
 
-Connexion::connecter();
-$arrayEtab = EtablissementDao::getAll();
+$rsEtab = obtenirIdNomGroupesAHeberger($connexion);
 //$rsEtab = mysql_query($req, $connexion);
 
 // BOUCLE SUR LES ÉTABLISSEMENTS
-for ($i=0; $i<count($arrayEtab); $i++) {
-    $unEtab = $arrayEtab[$i];    
+while ($lgEtab = $rsEtab->fetch(PDO::FETCH_ASSOC)) {
+    $id = $lgEtab['id'];
+    $nom = $lgEtab['nom'];
     echo "
 		<tr class='ligneTabNonQuad'>
-         <td width='52%'>".$unEtab->getNom()."</td>
+         <td width='52%'>$nom</td>
          
          <td width='16%' align='center'> 
-         <a href='cGestionEtablissements.php?action=detailEtab&id=".$unEtab->getId()."'>
+         <a href='cGestionGroupes.php?action=detailGroupe&id=$id'>
          Voir détail</a></td>
          
          <td width='16%' align='center'> 
-         <a href='cGestionEtablissements.php?action=demanderModifierEtab&id=".$unEtab->getId()."'>
+         <a href='cGestionGroupes.php?action=demanderModifierGroupe&id=$id'>
          Modifier</a></td>";
 
     // S'il existe déjà des attributions pour l'établissement, il faudra
     // d'abord les supprimer avant de pouvoir supprimer l'établissement
-    if (!existeAttributionsEtab($connexion, $unEtab->getId())) {
+    if (!existeAttributionsEtab($connexion, $id)) {
         echo "
             <td width='16%' align='center'> 
-            <a href='cGestionEtablissements.php?action=demanderSupprimerEtab&id=".$unEtab->getId()."'>
+            <a href='cGestionGroupes.php?action=demanderSupprimerGroupe&id=$id'>
             Supprimer</a></td>";
     } else {
         echo "
@@ -56,10 +50,8 @@ for ($i=0; $i<count($arrayEtab); $i++) {
 echo "
 </table>
 <br>
-<a href='cGestionEtablissements.php?action=demanderCreerEtab'>
-Création d'un établissement</a >";
+<a href='cGestionGroupes.php?action=demanderCreerGroupe'>
+Création d'un groupe</a >";
 
 include("_fin.inc.php");
-
-Connexion::deconnecter();
 

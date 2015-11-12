@@ -1,7 +1,12 @@
 <?php
 
 include("_debut.inc.php");
+use modele\dao\EtablissementDAO;
+require_once(__DIR__."/../../includes/fonctions.inc.php");
+use modele\Connexion;
+use modele\metier\Etablissement;
 
+Connexion::connecter();
 // CRÉER OU MODIFIER UN ÉTABLISSEMENT 
 // S'il s'agit d'une création et qu'on ne "vient" pas de ce formulaire (on 
 // "vient" de ce formulaire uniquement s'il y avait une erreur), il faut définir 
@@ -24,18 +29,19 @@ if ($action == 'demanderCreerEtab') {
 // faut récupérer les données sinon on affichera les valeurs précédemment 
 // saisies
 if ($action == 'demanderModifierEtab') {
-    $lgEtab = obtenirDetailEtablissement($connexion, $id);
+    $lgEtab = EtablissementDAO::getOneById($id);
 
-    $nom = $lgEtab['nom'];
-    $adresseRue = $lgEtab['adresseRue'];
-    $codePostal = $lgEtab['codePostal'];
-    $ville = $lgEtab['ville'];
-    $tel = $lgEtab['tel'];
-    $adresseElectronique = $lgEtab['adresseElectronique'];
-    $type = $lgEtab['type'];
-    $civiliteResponsable = $lgEtab['civiliteResponsable'];
-    $nomResponsable = $lgEtab['nomResponsable'];
-    $prenomResponsable = $lgEtab['prenomResponsable'];
+    $id = $lgEtab->getId();
+    $nom = $lgEtab->getNom();
+    $adresseRue = $lgEtab->getAdresseRue();
+    $codePostal = $lgEtab->getCodePostal();
+    $ville = $lgEtab->getVille();
+    $tel = $lgEtab->getTel();
+    $adresseElectronique = $lgEtab->getAdresseElectronique();
+    $type = $lgEtab->getType();
+    $civiliteResponsable = $lgEtab->getCiviliteResponsable();
+    $nomResponsable = $lgEtab->getNomResponsable();
+    $prenomResponsable = $lgEtab->getPrenomResponsable();
 }
 
 // Initialisations en fonction du mode (création ou modification) 
@@ -45,7 +51,7 @@ if ($action == 'demanderCreerEtab' || $action == 'validerCreerEtab') {
     $action = "validerCreerEtab";
 } else {
     $creation = false;
-    $message = "$nom ($id)";            // Alimentation du message de l'en-tête
+    $message = $lgEtab->getNom()." (".$lgEtab->getId().")";            // Alimentation du message de l'en-tête
     $action = "validerModifierEtab";
 }
 
@@ -78,7 +84,7 @@ if ($creation) {
 } else {
     echo "
          <tr>
-            <td><input type='hidden' value='$id' name='id'></td><td></td>
+            <td><input type='hidden' value='".$id."' name='id'></td><td></td>
          </tr>";
 }
 echo '
@@ -166,4 +172,3 @@ echo "
 </form>";
 
 include("_fin.inc.php");
-

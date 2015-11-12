@@ -3,14 +3,9 @@
 include("_gestionErreurs.inc.php");
 include("gestionDonnees/_connexion.inc.php");
 include("gestionDonnees/_gestionBaseFonctionsCommunes.inc.php");
-include("modele/Connexion.class.php");
-use  modele\Connexion;
-//require_once (require_once("/../modele/Connexion.class.php")
 
-        
-Connexion:: connecter();
 // 1ère étape (donc pas d'action choisie) : affichage du tableau des 
-// établissements 
+// Groupes
 if (!isset($_REQUEST['action'])) {
     $_REQUEST['action'] = 'initial';
 }
@@ -20,35 +15,35 @@ $action = $_REQUEST['action'];
 // Aiguillage selon l'étape
 switch ($action) {
     case 'initial' :
-        include("vues/GestionEtablissements/vObtenirEtablissements.php");
+        include("vues/GestionGroupes/vObtenirGroupe.php");
         break;
 
-    case 'detailEtab':
+    case 'detailGroupe':
         $id = $_REQUEST['id'];
-        include("vues/GestionEtablissements/vObtenirDetailEtablissement.php");
+        include("vues/GestionGroupes/vObtenirDetailGroupe.php");
         break;
 
-    case 'demanderSupprimerEtab':
+    case 'demanderSupprimerGroupe':
         $id = $_REQUEST['id'];
-        include("vues/GestionEtablissements/vSupprimerEtablissement.php");
+        include("vues/GestionGroupes/vSupprimerGroupe.php");
         break;
 
-    case 'demanderCreerEtab':
-        include("vues/GestionEtablissements/vCreerModifierEtablissement.php");
+    case 'demanderCreerGroupe':
+        include("vues/GestionGroupes/vCreerModifierGroupe.php");
         break;
 
-    case 'demanderModifierEtab':
+    case 'demanderModifierGroupe':
         $id = $_REQUEST['id'];
-        include("vues/GestionEtablissements/vCreerModifierEtablissement.php");
+        include("vues/GestionGroupes/vCreerModifierGroupe.php");
         break;
 
-    case 'validerSupprimerEtab':
+    case 'validerSupprimerGroupe':
         $id = $_REQUEST['id'];
         supprimerEtablissement($connexion, $id);
-        include("vues/GestionEtablissements/vObtenirEtablissements.php");
+        include("vues/GestionGroupes/vObtenirGroupe.php");
         break;
 
-    case 'validerCreerEtab':case 'validerModifierEtab':
+    case 'validerCreerGroupe':case 'validerModifierGroupe':
         $id = $_REQUEST['id'];
         $nom = $_REQUEST['nom'];
         $adresseRue = $_REQUEST['adresseRue'];
@@ -61,28 +56,28 @@ switch ($action) {
         $nomResponsable = $_REQUEST['nomResponsable'];
         $prenomResponsable = $_REQUEST['prenomResponsable'];
 
-        if ($action == 'validerCreerEtab') {
+        if ($action == 'validerCreerGroupe') {
             verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable);
             if (nbErreurs() == 0) {
                 creerModifierEtablissement($connexion, 'C', $id, $nom, $adresseRue, $codePostal, $ville, $tel, $adresseElectronique, $type, $civiliteResponsable, $nomResponsable, $prenomResponsable);
-                include("vues/GestionEtablissements/vObtenirEtablissements.php");
+                include("vues/GestionGroupes/vObtenirGroupe.php");
             } else {
-                include("vues/GestionEtablissements/vCreerModifierEtablissement.php");
+                include("vues/GestionGroupes/vCreerModifierGroupe.php");
             }
         } else {
             verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable);
             if (nbErreurs() == 0) {
                 creerModifierEtablissement($connexion, 'M', $id, $nom, $adresseRue, $codePostal, $ville, $tel, $adresseElectronique, $type, $civiliteResponsable, $nomResponsable, $prenomResponsable);
-                include("vues/GestionEtablissements/vObtenirEtablissements.php");
+                include("vues/GestionGroupes/vObtenirGroupe.php");
             } else {
-                include("vues/GestionEtablissements/vCreerModifierEtablissement.php");
+                include("vues/GestionGroupes/vCreerModifierGroupe.php");
             }
         }
         break;
 }
-Connexion:: deconnecter();
- //Fermeture de la connexion au serveur MySql
 
+// Fermeture de la connexion au serveur MySql
+$connexion = null;
 
 function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
     if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" ||

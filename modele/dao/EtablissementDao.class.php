@@ -81,16 +81,55 @@ class EtablissementDao implements Dao  {
     }
 
 
-    public static function insert($objetMetier) {
-        return FALSE;
+   public static function insert($objetMetier) {
+        try {
+            $objetRef = self::objetVersEnregistrement($objetMetier);
+            // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
+            $sql = "INSERT INTO etablissement (id, nom, adresseRue, codePostal, ville, tel, adresseElectronique, type, civiliteResponsable, nomResponsable, prenomResponsable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // préparer la requête PDO
+            $queryPrepare = Connexion::getPdo()->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres dans un tableau
+            $queryPrepare->execute($objetRef);
+            $retour = "INSERT Réussi !";
+        } catch (PDOException $e) {
+            echo get_class() . ' - '.__METHOD__ . ' : '. $e->getMessage();
+        }
+        return $retour;
     }
     
     public static function update($idMetier, $objetMetier) {
-        return FALSE;
+        try {
+            $objetRef = self::objetVersEnregistrement($objetMetier);
+            
+            // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
+            $sql = "UPDATE etablissement SET id = ?, nom = ?, adresseRue = ?, codePostal = ?, ville = ?, tel = ?, adresseElectronique = ?, type = ?, civiliteResponsable = ?, nomResponsable = ?, prenomResponsable = ? WHERE id=".$idMetier;
+            // préparer la requête PDO
+            $queryPrepare = Connexion::getPdo()->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres dans un tableau
+            $queryPrepare->execute($objetRef);
+            $retour = "UPDATE Réussi !";
+        } catch (PDOException $e) {
+            echo get_class() . ' - '.__METHOD__ . ' : '. $e->getMessage();
+        }
+        return $retour;
     }
 
     public static function delete($idMetier) {
+        try {
+            // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
+            $sql = "DELETE FROM etablissement WHERE id = ?";
+            // préparer la requête PDO
+            $queryPrepare = Connexion::getPdo()->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici)
+            if ($queryPrepare->execute(array($idMetier))) {
+                // si la requête réussit :
+                $retour = "DELETE Réussi";
+            }
+        } catch (PDOException $e) {
+            echo get_class() . ' - '.__METHOD__ . ' : '. $e->getMessage();
+        }
         
+        return $retour;
     }
     
     function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
