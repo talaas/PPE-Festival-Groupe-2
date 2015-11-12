@@ -147,7 +147,30 @@ function obtenirIdGroupes($connexion) {
     $stmt->execute();
     return $stmt;
 }
-
+function estUnIdGroupe($connexion, $id) {
+//    global $connexion;
+    $req = "SELECT COUNT(*) FROM Groupe WHERE id=?";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute(array($id));
+    return $stmt->fetchColumn();
+}
+function estUnNomGroupe($connexion, $mode, $id, $nom) {
+//    global $connexion;
+    $nom = str_replace("'", "''", $nom);
+    // S'il s'agit d'une création, on vérifie juste la non existence du nom sinon
+    // on vérifie la non existence d'un autre établissement (id!='$id') portant 
+    // le même nom
+    if ($mode == 'C') {
+        $req = "SELECT COUNT(*) FROM Groupe WHERE nom=?";
+        $stmt = $connexion->prepare($req);
+        $stmt->execute(array($nom));
+    } else {
+        $req = "SELECT COUNT(*) FROM Groupe WHERE nom=? AND id<>?";
+        $stmt = $connexion->prepare($req);
+        $stmt->execute(array($nom, $id));
+    }
+    return $stmt->fetchColumn();
+}
 function obtenirNomGroupes($connexion) {
     $req = "SELECT nom FROM Groupe ORDER BY nom";
     $stmt = $connexion->prepare($req);

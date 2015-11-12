@@ -1,5 +1,5 @@
 <?php
-
+use modele\Connexion;
 include("_gestionErreurs.inc.php");
 include("gestionDonnees/_connexion.inc.php");
 include("gestionDonnees/_gestionBaseFonctionsCommunes.inc.php");
@@ -44,30 +44,26 @@ switch ($action) {
         break;
 
     case 'validerCreerGroupe':case 'validerModifierGroupe':
-        $id = $_REQUEST['id'];
-        $nom = $_REQUEST['nom'];
-        $adresseRue = $_REQUEST['adresseRue'];
-        $codePostal = $_REQUEST['codePostal'];
-        $ville = $_REQUEST['ville'];
-        $tel = $_REQUEST['tel'];
-        $adresseElectronique = $_REQUEST['adresseElectronique'];
-        $type = $_REQUEST['type'];
-        $civiliteResponsable = $_REQUEST['civiliteResponsable'];
-        $nomResponsable = $_REQUEST['nomResponsable'];
-        $prenomResponsable = $_REQUEST['prenomResponsable'];
+        $id = $lgGroupe ['id'];
+        $nom = $lgGroupe['nom'];
+        $identiteResponsable = $lgGroupe['identiteResponsable'];
+        $adressePostale = $lgGroupe['adressePostale'];
+        $nombrePersonnes= $lgGroupe['nombrePersonnes'];
+        $nomPays = $lgGroupe['nomPays'];
+        $hebergement = $lgGroupe['hebergement'];
 
         if ($action == 'validerCreerGroupe') {
             verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable);
             if (nbErreurs() == 0) {
-                creerModifierEtablissement($connexion, 'C', $id, $nom, $adresseRue, $codePostal, $ville, $tel, $adresseElectronique, $type, $civiliteResponsable, $nomResponsable, $prenomResponsable);
+                creerModifierGroupe($connexion, 'C', $id, $nom, $adresseRue, $codePostal,$nomResponsable);
                 include("vues/GestionGroupes/vObtenirGroupe.php");
             } else {
                 include("vues/GestionGroupes/vCreerModifierGroupe.php");
             }
         } else {
-            verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable);
+            verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $nomResponsable);
             if (nbErreurs() == 0) {
-                creerModifierEtablissement($connexion, 'M', $id, $nom, $adresseRue, $codePostal, $ville, $tel, $adresseElectronique, $type, $civiliteResponsable, $nomResponsable, $prenomResponsable);
+                creerModifierGroupe($connexion, 'M', $id, $nom, $adresseRue, $codePostal, $nomResponsable);
                 include("vues/GestionGroupes/vObtenirGroupe.php");
             } else {
                 include("vues/GestionGroupes/vCreerModifierGroupe.php");
@@ -79,9 +75,8 @@ switch ($action) {
 // Fermeture de la connexion au serveur MySql
 $connexion = null;
 
-function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
-    if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" ||
-            $ville == "" || $tel == "" || $nomResponsable == "") {
+function verifierDonneesGroupeC($connexion, $id, $nom, $adresseRue, $codePostal, $nomResponsable) {
+    if ($id == "" || $nom == "" || $adresseRue == "" || $codePostal == "" || $nomResponsable == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
     if ($id != "") {
@@ -91,26 +86,25 @@ function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $
             ajouterErreur
                     ("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
         } else {
-            if (estUnIdEtablissement($connexion, $id)) {
-                ajouterErreur("L'établissement $id existe déjà");
+            if (estUnIdGroupe($connexion, $id)) {
+                ajouterErreur("Le Groupe $id existe déjà");
             }
         }
     }
-    if ($nom != "" && estUnNomEtablissement($connexion, 'C', $id, $nom)) {
-        ajouterErreur("L'établissement $nom existe déjà");
+    if ($nom != "" && estUnNomGroupe($connexion, 'C', $id, $nom)) {
+        ajouterErreur("Le Groupe $nom existe déjà");
     }
     if ($codePostal != "" && !estUnCp($codePostal)) {
         ajouterErreur('Le code postal doit comporter 5 chiffres');
     }
 }
 
-function verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
-    if ($nom == "" || $adresseRue == "" || $codePostal == "" || $ville == "" ||
-            $tel == "" || $nomResponsable == "") {
+function verifierDonneesGroupebM($connexion, $id, $nom, $adresseRue, $codePostal, $nomResponsable) {
+    if ($nom == "" || $adresseRue == "" || $codePostal == "" || $nomResponsable == "") {
         ajouterErreur('Chaque champ suivi du caractère * est obligatoire');
     }
-    if ($nom != "" && estUnNomEtablissement($connexion, 'M', $id, $nom)) {
-        ajouterErreur("L'établissement $nom existe déjà");
+    if ($nom != "" && estUnNomGroupe($connexion, 'M', $id, $nom)) {
+        ajouterErreur("Le Groupe $nom existe déjà");
     }
     if ($codePostal != "" && !estUnCp($codePostal)) {
         ajouterErreur('Le code postal doit comporter 5 chiffres');

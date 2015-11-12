@@ -88,6 +88,11 @@ echo '
          size="50" maxlength="45"></td>
       </tr>
       <tr class="ligneTabNonQuad">
+         <td> adresse postale*: </td>
+         <td><input type="text" value="' . $adressePostale . '" name="adressePostale" 
+         size="50" maxlength="45"></td>
+      </tr>
+      <tr class="ligneTabNonQuad">
          <td> Nombre de personnes*: </td>
          <td><input type="text" value="' . $nombrePersonnes . '" name="nombrePersonnes" 
          size="7" maxlength="5"></td>
@@ -96,10 +101,10 @@ echo '
          <td> Nom pays*: </td>
          <td><input type="text" value="' . $nomPays . '" name="nomPays" size="40" 
          maxlength="35"></td>
-      </tr>
+      </tr>';
      
       
-   </table>';
+   
 echo "
            </td>
          </tr>
@@ -110,7 +115,7 @@ echo "
          <tr class='ligneTabNonQuad'>
             <td> Hebergement*: </td>
             <td> <select name='hebergement'>";
-for ($i = 0; $i < 3; $i = $i + 1) {
+for ($i = 0; $i < 2; $i = $i + 1) {
     if ($tabHebergement[$i] == $hebergement) {
         echo "<option selected>$tabHebergement[$i]</option>";
     } else {
@@ -118,6 +123,7 @@ for ($i = 0; $i < 3; $i = $i + 1) {
     }
 }
 echo "
+    </table>
    <table align='center' cellspacing='15' cellpadding='0'>
       <tr>
          <td align='right'><input type='submit' value='Valider' name='valider'>
@@ -127,6 +133,7 @@ echo "
       </tr>
    </table>
    <a href='cGestionGroupes.php'>Retour</a>
-</form>";
+    </form>
+'";
 
 include("_fin.inc.php");

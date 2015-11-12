@@ -2,9 +2,9 @@
 use modele\dao\FonctionsCommunesDao;
 include("_debut.inc.php");
 
-// AFFICHER L'ENSEMBLE DES ÉTABLISSEMENTS
+// AFFICHER L'ENSEMBLE DES Groupes
 // CETTE PAGE CONTIENT UN TABLEAU CONSTITUÉ D'1 LIGNE D'EN-TÊTE ET D'1 LIGNE PAR
-// ÉTABLISSEMENT
+// Groupe
 
 echo "
 <br>
@@ -17,7 +17,7 @@ echo "
 $rsEtab = obtenirIdNomGroupesAHeberger($connexion);
 //$rsEtab = mysql_query($req, $connexion);
 
-// BOUCLE SUR LES ÉTABLISSEMENTS
+// BOUCLE SUR LES Groupes
 while ($lgEtab = $rsEtab->fetch(PDO::FETCH_ASSOC)) {
     $id = $lgEtab['id'];
     $nom = $lgEtab['nom'];
