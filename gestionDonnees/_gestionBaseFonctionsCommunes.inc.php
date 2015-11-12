@@ -127,6 +127,14 @@ function obtenirIdNomGroupes($connexion) {
     $stmt->execute();
     return $stmt;
 }
+
+function obtenirDetailGroupe($connexion, $id) {
+    $req = "SELECT * FROM Groupe WHERE id=?";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute(array($id));
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function obtenirIdGroupes($connexion) {
     $req = "SELECT id FROM Groupe ORDER BY id";
     $stmt = $connexion->prepare($req);
@@ -175,6 +183,8 @@ function hebergement($connexion) {
     $stmt->execute();
     return $stmt;
 }
+
+//fin Groupe
 
 function obtenirNbEtabOffrantChambres($connexion) {
 //    global $connexion;
