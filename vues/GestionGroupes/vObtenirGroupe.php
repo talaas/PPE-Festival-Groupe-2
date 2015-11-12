@@ -1,5 +1,5 @@
 <?php
-
+use modele\dao\FonctionsCommunesDao;
 include("_debut.inc.php");
 
 // AFFICHER L'ENSEMBLE DES ÉTABLISSEMENTS

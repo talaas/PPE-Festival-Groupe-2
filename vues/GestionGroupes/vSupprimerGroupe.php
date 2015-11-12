@@ -1,8 +1,19 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+include("_debut.inc.php");
+
+// SUPPRIMER LE GROUPE SÉLECTIONNÉ
+
+$id = $_REQUEST['id'];  // Non obligatoire mais plus propre
+$lgGroupe = obtenirDetailGroupe($connexion, $id);
+$nom = $lgGroupe['nom'];
+echo "
+<br><center>Voulez-vous vraiment supprimer le groupe $nom ?
+<h3><br>
+<a href='cGestionGroupess.php?action=validerSupprimerGroupe&id=$id'>Oui</a>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<a href='cGestionGroupes.php?'>Non</a></h3>
+</center>";
+
+include("_fin.inc.php");
 

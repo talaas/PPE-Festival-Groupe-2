@@ -119,6 +119,63 @@ function obtenirNbEtab($connexion) {
     return $stmt->fetchColumn();
 }
 
+//gestion des Groupes
+
+function obtenirIdNomGroupes($connexion) {
+    $req = "SELECT id, nom FROM groupe ORDER BY id";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+function obtenirIdGroupes($connexion) {
+    $req = "SELECT id FROM Groupe ORDER BY id";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirNomGroupes($connexion) {
+    $req = "SELECT nom FROM Groupe ORDER BY nom";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirIdentiteResponsable($connexion) {
+    $req = "SELECT identiteResponsable FROM Groupe ORDER BY identiteResponsable";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function obtenirAdressePostale($connexion) {
+    $req = "SELECT adressePostale FROM Groupe ORDER BY adressePostale";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+function obtenirNombrePersonnes($connexion) {
+    $req = "SELECT nombrePersonnes FROM Groupe ORDER BY nombrePersonnes";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+
+function obtenirNomPays($connexion) {
+    $req = "SELECT nomPays FROM Groupe ORDER BY nomPays";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
+function hebergement($connexion) {
+    $req = "SELECT hebergement FROM Groupe ORDER BY hebergement";
+    $stmt = $connexion->prepare($req);
+    $stmt->execute();
+    return $stmt;
+}
+
 function obtenirNbEtabOffrantChambres($connexion) {
 //    global $connexion;
     $req = "SELECT COUNT(DISTINCT idEtab) FROM Offre";
