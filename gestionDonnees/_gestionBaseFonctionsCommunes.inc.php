@@ -129,11 +129,37 @@ function obtenirNbEtabOffrantChambres($connexion) {
 
 // Fonctions de Gestion des Groupes
 
+function creerModifierGroupe($connexion, $mode, $id, $nom, $identiteResponsable,$adressePostale, $nombrePersonnes,$nomPays ,$hebergement) {
+    
+    if ($mode == 'C') {
+        $req = "INSERT INTO Groupe VALUES (:id, :nom, :identiteResponsable,:adressePostale, :nombrePersonnes, :nomPays, :hebergement)";
+    } else {
+        $req = "UPDATE Groupe SET 
+           nom=:nom,identiteResponsable=:identiteResponsable,adressePostale=:adressePostale,nombrePersonnes=:nombrePersonnes,nomPays=:nomPays,hebergement=:hebergement 
+           WHERE id=:id";
+    }
+    $stmt = $connexion->prepare($req);
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':identiteResponsable', $identiteResponsable);
+    $stmt->bindParam(':adressePostale', $adressePostale);
+    $stmt->bindParam(':nombrePersonnes', $nombrePersonnes);
+    $stmt->bindParam(':nomPays', $nomPays);
+    $stmt->bindParam(':hebergement', $hebergement);
+    $ok = $stmt->execute();
+    return $ok;
+}
 function obtenirIdNomGroupes($connexion) {
     $req = "SELECT id, nom FROM groupe ORDER BY id";
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt;
+}
+function supprimerGroupe($connexion, $id) {
+    $req = "DELETE FROM Groupe WHERE id=?";
+    $stmt = $connexion->prepare($req);
+    $ok = $stmt->execute(array($id));
+    return $ok;
 }
 function obtenirDetailGroupe($connexion, $id) {
     $req = "SELECT * FROM Groupe WHERE id=?";

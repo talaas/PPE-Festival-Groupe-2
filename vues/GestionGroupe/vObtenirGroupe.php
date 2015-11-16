@@ -14,7 +14,7 @@ echo "
       <td colspan='4'><strong>Groupes</strong></td>
    </tr>";
 
-$rsEtab = obtenirIdNomGroupesAHeberger($connexion);
+$rsEtab = obtenirIdNomGroupes($connexion);
 //$rsEtab = mysql_query($req, $connexion);
 
 // BOUCLE SUR LES Groupes
@@ -50,7 +50,7 @@ while ($lgEtab = $rsEtab->fetch(PDO::FETCH_ASSOC)) {
 echo "
 </table>
 <br>
-<a href='cGestionGroupes.php?action=demanderCreerGroupe'>
+<a href='cGestionGroupes.php?action=demanderCreerGroupes'>
 Création d'un groupe</a >";
 
 include("_fin.inc.php");
