@@ -21,7 +21,7 @@ echo "
    </tr>";
 
 Connexion::connecter();
-$arrayEtab = EtablissementDao::getAll();
+$arrayEtab = EtablissementDAO::getAll();
 //$rsEtab = mysql_query($req, $connexion);
 
 // BOUCLE SUR LES ÉTABLISSEMENTS

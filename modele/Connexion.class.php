@@ -10,8 +10,8 @@ use \PDO;
 use \PDOException;
 
 define('DSN', 'mysql:host=localhost;dbname=festival');
-define('USER', 'root');
-define('MDP', "");
+define('USER', 'festival');
+define('MDP', "secret");
 
 class Connexion {
     

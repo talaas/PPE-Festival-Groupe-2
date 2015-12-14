@@ -36,7 +36,7 @@ class EtablissementDao implements Dao  {
     public static function getAll() {
         $retour = null;
         // Requête textuelle
-        $sql = "SELECT * FROM etablissement";
+        $sql = "SELECT * FROM Etablissement";
         try {
             // préparer la requête PDO
             $queryPrepare = Connexion:: getPdo()->prepare($sql);
@@ -63,7 +63,7 @@ class EtablissementDao implements Dao  {
         $retour = null;
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "SELECT * FROM etablissement WHERE id = ?";
+            $sql = "SELECT * FROM Etablissement WHERE id = ?";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
@@ -85,7 +85,7 @@ class EtablissementDao implements Dao  {
         try {
             $objetRef = self::objetVersEnregistrement($objetMetier);
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "INSERT INTO etablissement (id, nom, adresseRue, codePostal, ville, tel, adresseElectronique, type, civiliteResponsable, nomResponsable, prenomResponsable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO Etablissement (id, nom, adresseRue, codePostal, ville, tel, adresseElectronique, type, civiliteResponsable, nomResponsable, prenomResponsable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres dans un tableau
@@ -102,7 +102,7 @@ class EtablissementDao implements Dao  {
             $objetRef = self::objetVersEnregistrement($objetMetier);
             
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "UPDATE etablissement SET id = ?, nom = ?, adresseRue = ?, codePostal = ?, ville = ?, tel = ?, adresseElectronique = ?, type = ?, civiliteResponsable = ?, nomResponsable = ?, prenomResponsable = ? WHERE id=".$idMetier;
+            $sql = "UPDATE Etablissement SET id = ?, nom = ?, adresseRue = ?, codePostal = ?, ville = ?, tel = ?, adresseElectronique = ?, type = ?, civiliteResponsable = ?, nomResponsable = ?, prenomResponsable = ? WHERE id=".$idMetier;
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres dans un tableau
@@ -117,7 +117,7 @@ class EtablissementDao implements Dao  {
     public static function delete($idMetier) {
         try {
             // Requête textuelle paramétrée (le paramètre est symbolisé par un ?)
-            $sql = "DELETE FROM etablissement WHERE id = ?";
+            $sql = "DELETE FROM Etablissement WHERE id = ?";
             // préparer la requête PDO
             $queryPrepare = Connexion::getPdo()->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici)

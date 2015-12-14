@@ -150,7 +150,7 @@ function creerModifierGroupe($connexion, $mode, $id, $nom, $identiteResponsable,
     return $ok;
 }
 function obtenirIdNomGroupes($connexion) {
-    $req = "SELECT id, nom FROM groupe ORDER BY id";
+    $req = "SELECT id, nom FROM Groupe ORDER BY id";
     $stmt = $connexion->prepare($req);
     $stmt->execute();
     return $stmt;
