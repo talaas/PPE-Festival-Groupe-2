@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/Festival_Initial/cGestionGroupes.php</file>
-            <file>file:/C:/wamp/www/Festival_Initial/vues/GestionGroupe/vObtenirGroupe.php</file>
-            <file>file:/C:/wamp/www/Festival_Initial/vues/GestionGroupe/vCreerModifierGroupe.php</file>
-            <file>file:/C:/wamp/www/Festival_Initial/gestionDonnees/_gestionBaseFonctionsCommunes.inc.php</file>
-            <file>file:/C:/wamp/www/Festival_Initial/vues/GestionGroupe/vSupprimerGroupe.php</file>
+            <file>file:/D:/Lycée/2ème%20année/PPE/Projet%20Festival/PPE_Festival_1-master-pour-serveur-FTP/modele/dao/AttribDAO.class.php</file>
+            <file>file:/D:/Lycée/2ème%20année/PPE/Projet%20Festival/PPE_Festival_1-master-pour-serveur-FTP/cAttributionChambres.php</file>
+            <file>file:/D:/Lycée/2ème%20année/PPE/Projet%20Festival/PPE_Festival_1-master-pour-serveur-FTP/vues/AttributionChambres/vModifierAttributionChambres.php</file>
         </group>
     </open-files>
 </project-private>

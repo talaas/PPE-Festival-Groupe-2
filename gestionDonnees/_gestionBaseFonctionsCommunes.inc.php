@@ -156,9 +156,12 @@ function obtenirIdNomGroupes($connexion) {
     return $stmt;
 }
 function supprimerGroupe($connexion, $id) {
-    $req = "DELETE FROM Groupe WHERE id=?";
+    $req = "DELETE FROM Attribution WHERE idGroupe=?";
+    $req2 = "DELETE FROM Groupe WHERE id=?";
     $stmt = $connexion->prepare($req);
-    $ok = $stmt->execute(array($id));
+    $stmt2 = $connexion->prepare($req2);
+    $ok = $stmt->execute(array($id))
+            +$stmt2->execute(array($id));
     return $ok;
 }
 function obtenirDetailGroupe($connexion, $id) {
